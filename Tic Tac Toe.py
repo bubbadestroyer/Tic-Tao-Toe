@@ -1,13 +1,13 @@
-game_field = [1, 4, 7, 2, 5, 8, 3, 6, 9]
+game_field = [1, 2,3,4,5,6,7,8,9]
 
 
 def print_field():
     k = 0
     for i in range(1, 6):
         if (i in (1, 3, 5)):
-            print(f'{game_field[k]}', ' | ', f'{game_field[k+3]}', ' | ',
-                  f'{game_field[k+6]}')
-            k += 1
+            print(f'{game_field[0+k]}', ' | ', f'{game_field[1+k]}', ' | ',
+                  f'{game_field[2+k]}')
+            k += 3
         elif (i in (2, 4)):
             print('---|-----|----')
 
@@ -33,12 +33,17 @@ def player_move(id):
     print(f'Ходит игрок №{id}')
     player_move_choice = int((input('Выберите номер ячейки: ')))
     if 1 <= player_move_choice <= 9:
-        if id == 1:
-            game_field[game_field.index(player_move_choice)] = 'X'
+        if(type(game_field[player_move_choice-1]) == int):
+            if id == 1:
+                game_field[player_move_choice-1] = 'X'
+            else:
+                game_field[player_move_choice-1] = 'O'
+            print_field()
+            return victory_check(id)
         else:
-            game_field[game_field.index(player_move_choice)] = 'O'
-        print_field()
-        return victory_check(id)
+            print('В данную ячейку уже был сделал ход, выберите другую ячейку')
+            print_field()
+            player_move(id)
     else:
         print('Введено некорректное значение, повторите ввод')
         player_move(id)
@@ -46,7 +51,7 @@ def player_move(id):
 
 def reset_game():
     global game_field
-    answer = input(('Введите "Да", если желаете продожить игру: '))
+    answer = input(('Введите "Да", если желаете продолжить игру: '))
     if answer.upper() == 'ДА':
         game_field = [1, 4, 7, 2, 5, 8, 3, 6, 9]
         game()
