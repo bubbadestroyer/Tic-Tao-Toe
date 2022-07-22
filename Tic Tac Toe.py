@@ -1,4 +1,4 @@
-game_field = [1, 2,3,4,5,6,7,8,9]
+game_field = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
 def print_field():
@@ -33,11 +33,11 @@ def player_move(id):
     print(f'Ходит игрок №{id}')
     player_move_choice = int((input('Выберите номер ячейки: ')))
     if 1 <= player_move_choice <= 9:
-        if(type(game_field[player_move_choice-1]) == int):
+        if (type(game_field[player_move_choice - 1]) == int):
             if id == 1:
-                game_field[player_move_choice-1] = 'X'
+                game_field[player_move_choice - 1] = 'X'
             else:
-                game_field[player_move_choice-1] = 'O'
+                game_field[player_move_choice - 1] = 'O'
             print_field()
             return victory_check(id)
         else:
