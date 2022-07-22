@@ -12,7 +12,7 @@ def print_field():
             print('---|-----|----')
 
 
-def win(id):
+def victory_check(id):
     if (game_field[0] == game_field[1] == game_field[2]
             or game_field[3] == game_field[4] == game_field[5]
             or game_field[6] == game_field[7] == game_field[8]
@@ -29,22 +29,22 @@ def win(id):
         return True
 
 
-def player(id):
+def player_move(id):
     print(f'Ходит игрок №{id}')
-    player_choice = int((input('Выберите номер ячейки: ')))
-    if 1 <= player_choice <= 9:
+    player_move_choice = int((input('Выберите номер ячейки: ')))
+    if 1 <= player_move_choice <= 9:
         if id == 1:
-            game_field[game_field.index(player_choice)] = 'X'
+            game_field[game_field.index(player_move_choice)] = 'X'
         else:
-            game_field[game_field.index(player_choice)] = 'O'
+            game_field[game_field.index(player_move_choice)] = 'O'
         print_field()
-        return win(id)
+        return victory_check(id)
     else:
         print('Введено некорректное значение, повторите ввод')
-        player(id)
+        player_move(id)
 
 
-def reset():
+def reset_game():
     global game_field
     answer = input(('Введите "Да", если желаете продожить игру: '))
     if answer.upper() == 'ДА':
@@ -53,16 +53,16 @@ def reset():
 
 
 def game():
-    player_id = 1
+    player_move_id = 1
     print_field()
     while True:
-        if player(player_id) == True:
+        if player_move(player_move_id) == True:
             break
-        if player_id == 1:
-            player_id = 2
+        if player_move_id == 1:
+            player_move_id = 2
         else:
-            player_id = 1
-    reset()
+            player_move_id = 1
+    reset_game()
 
 
 game()
