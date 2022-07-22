@@ -12,7 +12,6 @@ def print_field():
             print('---|-----|----')
 
 
-
 def win(id):
     if (game_field[0] == game_field[1] == game_field[2]
             or game_field[3] == game_field[4] == game_field[5]
@@ -23,6 +22,10 @@ def win(id):
             or game_field[0] == game_field[4] == game_field[8]
             or game_field[2] == game_field[4] == game_field[6]):
         print(f'Победил игрок №{id}')
+        return True
+    elif any(num in [1, 2, 3, 4, 5, 6, 7, 8, 9]
+             for num in game_field) == False:
+        print('Ничья')
         return True
 
 
@@ -40,9 +43,10 @@ def player(id):
         print('Введено некорректное значение, повторите ввод')
         player(id)
 
+
 def reset():
     global game_field
-    answer = input(('Введите "Да", если желаете продожить игру'))
+    answer = input(('Введите "Да", если желаете продожить игру: '))
     if answer.upper() == 'ДА':
         game_field = [1, 4, 7, 2, 5, 8, 3, 6, 9]
         game()
@@ -59,7 +63,6 @@ def game():
         else:
             player_id = 1
     reset()
-    
 
 
 game()
