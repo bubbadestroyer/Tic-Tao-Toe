@@ -15,24 +15,58 @@ def move(choice,mark):
         game_field[game_field.index(choice)] = mark
         print_field()
 
+def win():
+    if(game_field[0] == game_field[1] == game_field[2] or 
+           game_field[3] == game_field[4] == game_field[5] or 
+           game_field[6] == game_field[7] == game_field[8] or
+           game_field[0] == game_field[3] == game_field[6] or
+           game_field[1] == game_field[4] == game_field[7] or
+           game_field[2] == game_field[5] == game_field[8] or
+           game_field[0] == game_field[4] == game_field[8] or
+           game_field[2] == game_field[4] == game_field[6]):
+            print('Победил 1-ый игрок')
+            return True
 
-def first_player():
+def player(mark):
     player_choice = int((input('Выберите номер ячейки: ')))
     if 1 <= player_choice <= 9:
-        move(player_choice, mark = 'X')
+        move(player_choice, mark)
+        return win()
     else:
         print('Введено некорректное значение, повторите ввод')
-        first_player()
-
-def second_player():
-    player_choice = int((input('Выберите номер ячейки: ')))
-    if 1 <= player_choice <= 9:
-        move(player_choice, mark = 'O')
-    else:
-        print('Введено некорректное значение, повторите ввод')
-        first_player()
+        player()
 
 
-print_field()
-first_player()
-second_player()
+
+
+# def first_player():
+#     player_choice = int((input('Выберите номер ячейки: ')))
+#     if 1 <= player_choice <= 9:
+#         move(player_choice, mark = 'X')
+#         return win()
+#     else:
+#         print('Введено некорректное значение, повторите ввод')
+#         first_player()
+
+# def second_player():
+#     player_choice = int((input('Выберите номер ячейки: ')))
+#     if 1 <= player_choice <= 9:
+#         move(player_choice, mark = 'O')
+#         win()
+#     else:
+#         print('Введено некорректное значение, повторите ввод')
+#         second_player()
+
+def game():
+    mark = 'X'
+    print_field()
+    while True:
+        if player(mark) == True:
+            break
+        if mark == 'X':
+            mark = 'O'
+        else:
+            mark = 'X'
+        
+
+game()
